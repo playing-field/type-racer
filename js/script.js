@@ -1,34 +1,31 @@
-$('#type').attr('placeholder','Type the above text Here');
+$('#type').attr('placeholder', 'Type the above text Here');
 
 
-$('textarea').text('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur corporis quos sunt. B' +
-    'landitiis distinctio, eligendi, i d molestias nihil numquam obcaecati odit placligendi, i d molestias nihil numquam obcaecati odit placeat quidem quo ratione,ligendi, i d molestias nihil numquam obcaecati odit placeat quidem quo ratione,eat quidem quo ratione, sunt tempore'+
-    'd molestias nihil numquam obcaecati odit placeat quidem quo ratione, sunt tempore totam voluptas?');
+$('textarea').text('Google, LLC is an American multinational technology company that specializes in Internet-related services and products.');
 
-
+// $('textarea').text('visura prabod jayanandana ovitage vishvi');
 
 
 var text = $('textarea').text();
 
 var words = text.split(" ");
 
-var totolChars=0;
+var totolChars = 0;
 words.forEach(value => {
-   totolChars+=value.length;
-
+    totolChars += value.length;
 })
 
 // console.log(totolChars); find  total characters
 
 
-var i=0;
-var bool=false;
-var typedTotalChars=0;
+var i = 0;
+var bool = false;
+var typedTotalChars = 0;
 
 
+$('#type').on('input', output);
 
-$('#type').on('input',output);
-function output(event){
+function output(event) {
     // console.log($('#type').val());  //This will take the current input
     // console.log(event.originalEvent.data); //This will return the key which pressed
 
@@ -42,110 +39,99 @@ function output(event){
     $('#type').removeClass('is-invalid');
 
 
-    var regex=('/^'+words[i]+'$/');
-    if(!regex.match($('#type').val())){
+    var regex = ('/^' + words[i] + '$/');
+    if (!regex.match($('#type').val())) {
         $('#type').addClass('is-invalid');
     }
 
-
-
-
-
-    if(bool){
-        if(event.originalEvent.data===" "){  //This will check whether space is pressed
+    if (bool) {
+        if (event.originalEvent.data === " ") {  //This will check whether space is pressed
             $('#type').val('');
-            bool=false;
+            bool = false;
 
-            if(i===0){
-                $('#type').attr('placeholder','');  //This will clear the placeholder after first word type correctly.
+            if (i === 0) {
+                $('#type').attr('placeholder', '');  //This will clear the placeholder after first word type correctly.
             }
 
             $('#type').removeClass('is-invalid');
 
-            typedTotalChars+=words[i].length;
+            typedTotalChars += words[i].length;
             setProgressBar();
             i++;
         }
     }
 
 
-    bool=false;
+    bool = false;
 
 
-    if($('#type').val()===words[i]){
-        bool=true;
+    if ($('#type').val() === words[i]) {
+        bool = true;
+
+        if (i === words.length - 1) {
+            $('#type').removeClass('is-invalid');
+
+            typedTotalChars += words[i].length;
+            setProgressBar();
+        }
+
     }
 
 }
 
 
+function setProgressBar() {
 
+    var value = Math.ceil(typedTotalChars / totolChars * 100);
 
+    $('.progress-bar').css('width', value + '%');
+    if (typedTotalChars === totolChars) {
+        $('main').children('h1:last-child').remove();
+        $('main').append($('<h1 id="go" style="color: red; font-size: 60px" class="animate__animated animate__zoomIn">Weldone!</h1>'));
+    }
 
-
-
-function setProgressBar(){
-
-    var value=Math.ceil(typedTotalChars/totolChars*100);
-
-    $('.progress-bar').css('width',value+'%');
 }
 
 
 $("#type").prop("disabled", true);
 
 
-
-setTimeout(function (){
+setTimeout(function () {
     $("#type").prop("disabled", false);
     $('#type').focus();
-},3000);
-
-
-
-
+}, 3000);
 
 
 var intId;
 
-var j=1;
-intId=setInterval(function (){
-    switch (j){
+var j = 1;
+intId = setInterval(function () {
+    switch (j) {
 
-        case 1:$('#countdown').children('div:first-child').addClass('invisible');
+        case 1:
+            $('#countdown').children('div:first-child').addClass('invisible');
             $('#countdown').children('div:nth-child(2)').removeClass('invisible');
             break;
-        case 2:$('#countdown').children('div:nth-child(2)').addClass('invisible');
+        case 2:
+            $('#countdown').children('div:nth-child(2)').addClass('invisible');
             $('#countdown').children('div:nth-child(3)').removeClass('invisible');
             break;
 
-        case 3:$('#countdown').children('div:nth-child(3)').addClass('invisible');
-                $('main').append($('<h1 id="go" style="color: red; font-size: 60px" class="animate__animated animate__zoomIn">GO!!</h1>'))
-                break;
+        case 3:
+            $('#countdown').children('div:nth-child(3)').addClass('invisible');
+            $('main').append($('<h1 id="go" style="color: red; font-size: 60px" class="animate__animated animate__zoomIn">GO!!</h1>'))
+            break;
     }
 
     j++;
 
-},1000);
+}, 1000);
 
 
-
-
-setTimeout(function (){
+setTimeout(function () {
     clearInterval(intId);
 
-},3000);
-
-
-
-
-
-
-
-
-
-
-
+}, 3000);
 
 
 // $('.progress-bar').attr('aria-valuenow',34);
