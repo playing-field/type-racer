@@ -12,6 +12,9 @@ h1 {
 
 #countdown * {
   border-radius: 100%;
+  text-align: center;
+  font-size: 40px;
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */

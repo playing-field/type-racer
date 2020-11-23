@@ -8,7 +8,7 @@ $('textarea').text('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Co
 
 
 
-var text = $('textarea').val();
+var text = $('textarea').text();
 
 var words = text.split(" ");
 
